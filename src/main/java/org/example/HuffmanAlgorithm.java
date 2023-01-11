@@ -25,10 +25,6 @@ public class HuffmanAlgorithm {
             priorityQueue.add(newNode);
         }
 
-        while (!priorityQueue.isEmpty()) {
-            System.out.println(priorityQueue.remove());
-        }
-
         return priorityQueue;
 
 
