@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 
 public class HuffmanTree {
 
-    private HuffmanTree buildTree(PriorityQueue<Node> freqTable){
+    private void buildTree(PriorityQueue<Node> freqTable){
 
     }
 }
