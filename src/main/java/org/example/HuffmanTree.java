@@ -4,8 +4,13 @@ import java.util.PriorityQueue;
 
 public class HuffmanTree {
 
-    private void buildTree(PriorityQueue<Node> freqTable){
-
+    public PriorityQueue<Node> buildTree(PriorityQueue<Node> freqTable){
+        while (!(freqTable.size() <= 1)){
+            Node newNode = new Node(freqTable.poll(),freqTable.poll());
+            freqTable.add(newNode);
+        }
+        System.out.println(".");
+        return freqTable;
     }
 }
 
