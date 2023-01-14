@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 
 public class HuffmanAlgorithm {
 
-    public PriorityQueue<Node> buildFrequencyTable(String text){
+    public static PriorityQueue<Node> buildFrequencyTable(String text){
         PriorityQueue<Node> priorityQueue = new PriorityQueue<>(new NodeComparator());
         HashMap<Character,Integer> freqTable = new HashMap<>();
         for (int i = 0; i < text.length(); i++){
@@ -31,11 +31,49 @@ public class HuffmanAlgorithm {
         
     }
 
-    public static void encode(String text) {
+    public static String encode(String text) { //question for friday, caught in a loop becuase not all nodes are being hit, once e is found to have no children, it breaks
+        PriorityQueue<Node> frequencyTable = buildFrequencyTable(text);
+        HuffmanTree huffmanTree = new HuffmanTree();
+        Node currentNode = huffmanTree.buildTree(frequencyTable).getHead();
+
+        HashMap<Character,String> binaryMap = createMap(currentNode,"");
+
+        String compressedText = "";
+        for (int i = 0; i < text.length(); i++){
+            compressedText+= binaryMap.get(text.charAt(i));
+        }
+        System.out.println("Saved: " + calculateSpaceSaved(text, compressedText));
+        return compressedText;
+
 
     }
+    static HashMap<Character,String> binaryMap = new HashMap<>();
+    public static HashMap<Character,String> createMap(Node node, String binary){
+        Node currentNode = node;
 
-    public static void decode(HuffmanTree tree, String text) {
+            if (currentNode.getLeftChild() == null && currentNode.getRightChild() == null){ //no children
+                binaryMap.put(currentNode.getCharacter(), binary);
+                return binaryMap;
+            }
+        binaryMap.putAll(createMap(node.getLeftChild(), binary + "0"));
+        binaryMap.putAll(createMap(node.getRightChild(), binary + "1"));
+            return binaryMap;
+        }
 
+    public static String decode(HuffmanTree tree, String text) {
+        return "";
     }
+
+    public static boolean isBinary(String string) {
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) != '0' && string.charAt(i) != '1') {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static double calculateSpaceSaved(String original, String compressed) {
+        return 1.0 - (compressed.length() / (double) (original.length() * 8));
+    }
+
 }

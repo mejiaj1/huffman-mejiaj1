@@ -6,6 +6,16 @@ public class Node {
     private Node leftChild;
     private Node rightChild;
 
+    private String binaryCode = "";
+
+    public String getBinaryCode() {
+        return binaryCode;
+    }
+
+    public void setBinaryCode(String binaryCode) {
+        this.binaryCode = binaryCode;
+    }
+
     public Node(Node leftChild, Node rightChild) {
         this.leftChild = leftChild;
         this.rightChild = rightChild;
