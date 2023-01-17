@@ -61,7 +61,27 @@ public class HuffmanAlgorithm {
         }
 
     public static String decode(HuffmanTree tree, String text) {
-        return "";
+        if (!isBinary(text)){
+            return "ERROR: Not binary";
+        }
+        else {
+            String returnString = "";
+            Node currentNode = tree.getHead();
+            for (int i = 0; i < text.length();i++){
+                if (text.charAt(i) == '0'){
+                    currentNode = currentNode.getLeftChild();
+                }
+                if (text.charAt(i) == '1'){
+                    currentNode = currentNode.getRightChild();
+                }
+                if (currentNode.getRightChild() == null && currentNode.getLeftChild() == null){
+                    returnString += currentNode.getCharacter();
+                    currentNode = tree.getHead();
+                }
+            }
+            return returnString;
+        }
+
     }
 
     public static boolean isBinary(String string) {
