@@ -1,8 +1,9 @@
 package org.example;
 
+import java.io.Serializable;
 import java.util.PriorityQueue;
 
-public class HuffmanTree {
+public class HuffmanTree implements Serializable {
 
     Node head;
     public Node getHead(){
@@ -25,10 +26,11 @@ public class HuffmanTree {
             freqTable.add(newNode);
             System.out.println("Elements remaining in PQ: " + freqTable.size());
             System.out.println("");
+            if(freqTable.size()==1)
+                break;
         }
-        HuffmanTree huffmanTree = new HuffmanTree();
-        huffmanTree.setHead(freqTable.poll());
-        return huffmanTree;
+        setHead(freqTable.poll());
+        return this;
     }
 
     }

@@ -1,9 +1,17 @@
 package org.example;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         HuffmanAlgorithm huffman = new HuffmanAlgorithm();
         HuffmanTree tree = new HuffmanTree();
-        System.out.println(huffman.decode(tree.buildTree(huffman.buildFrequencyTable("The quick brown fox jumps over the lazy dog 1234567890")),huffman.encode("The quick brown fox jumps over the lazy dog 1234567890")));
+        File compressedTextFile = new File(System.getProperty("user.home") + "/Desktop", "CompressedText.txt");
+        File treeFile = new File(System.getProperty("user.home") + "/Desktop", "HuffmanTree.huff");
+        FileSaver fileSaver = new FileSaver();
+        fileSaver.loadHuffmanData(compressedTextFile,treeFile);
+        HuffmanTree tree2 = fileSaver.getNewHuffmanTree();
+        System.out.println(fileSaver.getNewCompressedText());
     }
 }

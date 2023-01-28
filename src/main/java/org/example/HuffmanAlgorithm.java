@@ -1,5 +1,12 @@
 package org.example;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -31,11 +38,11 @@ public class HuffmanAlgorithm {
         
     }
 
-    public static String encode(String text) { //question for friday, caught in a loop becuase not all nodes are being hit, once e is found to have no children, it breaks
+    public static String encode(String text) throws IOException { //question for friday, caught in a loop becuase not all nodes are being hit, once e is found to have no children, it breaks
         PriorityQueue<Node> frequencyTable = buildFrequencyTable(text);
         HuffmanTree huffmanTree = new HuffmanTree();
         Node currentNode = huffmanTree.buildTree(frequencyTable).getHead();
-
+        FileSaver.saveHuffmanTree(huffmanTree,text);
         HashMap<Character,String> binaryMap = createMap(currentNode,"");
 
         String compressedText = "";

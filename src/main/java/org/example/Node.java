@@ -1,6 +1,8 @@
 package org.example;
 
-public class Node {
+import java.io.Serializable;
+
+public class Node implements Serializable {
     private Integer frequency;
     private Character character;
     private Node leftChild;
